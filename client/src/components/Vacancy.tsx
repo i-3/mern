@@ -21,6 +21,8 @@ export type formSchema = {
 };
 
 export default function Vacancy() {
+  const API_URL = import.meta.env.VITE_API_URL;
+
   const navigate = useNavigate();
   const [isNew, setIsNew] = useState(true);
   const params = useParams();
@@ -35,7 +37,7 @@ export default function Vacancy() {
         };
       setIsNew(false);
       const response = await fetch(
-        `http://localhost:5050/record/vacancies/${params.id}`
+        `http://${API_URL}/record/vacancies/${params.id}`
       );
       if (!response.ok) {
         // console.error(`An error has occurred: ${response.statusText}`);
@@ -60,7 +62,7 @@ export default function Vacancy() {
     try {
       let response;
       if (isNew) {
-        response = await fetch('http://localhost:5050/record/vacancies', {
+        response = await fetch(`http://${API_URL}/record/vacancies`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -69,7 +71,7 @@ export default function Vacancy() {
         });
       } else {
         response = await fetch(
-          `http://localhost:5050/record/vacancies/${params.id}`,
+          `http://${API_URL}/record/vacancies/${params.id}`,
           {
             method: 'PATCH',
             headers: {

@@ -46,6 +46,8 @@ export type vacSchema = {
 };
 
 export default function VacancyList() {
+  const API_URL = import.meta.env.VITE_API_URL;
+
   const [sorting, setSorting] = useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
@@ -56,7 +58,7 @@ export default function VacancyList() {
 
   useEffect(() => {
     async function getRecords() {
-      const response = await fetch(`http://localhost:5050/record/vacancies`);
+      const response = await fetch(`http://${API_URL}/record/vacancies`);
       if (!response.ok) {
         const message = `An error occurred: ${response.statusText}`;
         console.error(message);
@@ -70,7 +72,7 @@ export default function VacancyList() {
   }, []);
 
   async function deleteVacancy(_id: string) {
-    await fetch(`http://localhost:5050/record/vacancies/${_id}`, {
+    await fetch(`http://${API_URL}/record/vacancies/${_id}`, {
       method: 'DELETE',
     });
     const newData = data.filter((el: any) => el._id !== _id);
