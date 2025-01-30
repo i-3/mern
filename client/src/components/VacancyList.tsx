@@ -58,7 +58,7 @@ export default function VacancyList() {
 
   useEffect(() => {
     async function getRecords() {
-      const response = await fetch(`https://${API_URL}/record/vacancies`);
+      const response = await fetch(`${API_URL}/record/vacancies`);
       if (!response.ok) {
         const message = `An error occurred: ${response.statusText}`;
         console.error(message);
@@ -72,7 +72,7 @@ export default function VacancyList() {
   }, []);
 
   async function deleteVacancy(_id: string) {
-    await fetch(`https://${API_URL}/record/vacancies/${_id}`, {
+    await fetch(`${API_URL}/record/vacancies/${_id}`, {
       method: 'DELETE',
     });
     const newData = data.filter((el: any) => el._id !== _id);

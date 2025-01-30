@@ -12,6 +12,7 @@ import {
 } from '@/components/ui/sidebar';
 import { ModeToggle } from './mode-toggle';
 import { Table2 } from 'lucide-react';
+import LocalTime from './local-time';
 
 const items = [
   {
@@ -29,8 +30,9 @@ const items = [
 export function AppSidebar() {
   return (
     <Sidebar>
-      <SidebarHeader>
+      <SidebarHeader className='flex-row items-center'>
         <ModeToggle />
+        <LocalTime />
       </SidebarHeader>
 
       <SidebarSeparator />

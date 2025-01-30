@@ -23,7 +23,7 @@ const Record = (props: any) => (
           text-sm font-medium ring-offset-background transition-colors
           focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring
           focus-visible:ring-offset-2 disabled:pointer-events-none
-          disabled:opacity-50 border border-input bg-background hover:bg-slate-100
+          disabled:opacity-50 border border-input bg-background hover:bg-muted
           h-9 rounded-md px-3'
           to={`/employees/edit/${props.record._id}`}
         >
@@ -34,7 +34,7 @@ const Record = (props: any) => (
           text-sm font-medium ring-offset-background transition-colors
           focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring
           focus-visible:ring-offset-2 disabled:pointer-events-none
-          disabled:opacity-50 border border-input bg-background hover:bg-slate-100
+          disabled:opacity-50 border border-input bg-background hover:bg-muted
           hover:text-accent-foreground h-9 rounded-md px-3'
           color='red'
           type='button'
@@ -57,7 +57,7 @@ export default function RecordList() {
   // This method fetches the records from the database.
   useEffect(() => {
     async function getRecords() {
-      const response = await fetch(`https://${API_URL}/record/`);
+      const response = await fetch(`${API_URL}/record/`);
 
       if (!response.ok) {
         const message = `An error occurred: ${response.statusText}`;
@@ -73,7 +73,7 @@ export default function RecordList() {
 
   // This method will delete a record
   async function deleteRecord(id: any) {
-    await fetch(`https://${API_URL}/record/${id}`, {
+    await fetch(`${API_URL}/record/${id}`, {
       method: 'DELETE',
     });
     const newRecords = records.filter((el: any) => el._id !== id);

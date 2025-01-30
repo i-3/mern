@@ -13,6 +13,7 @@ import {
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
+import Breadcrumbs from './breadcrumbs';
 
 export type formSchema = {
   employer: string;
@@ -36,9 +37,7 @@ export default function Vacancy() {
           state: 'pending',
         };
       setIsNew(false);
-      const response = await fetch(
-        `https://${API_URL}/record/vacancies/${params.id}`
-      );
+      const response = await fetch(`${API_URL}/record/vacancies/${params.id}`);
       if (!response.ok) {
         // console.error(`An error has occurred: ${response.statusText}`);
         return {
@@ -62,7 +61,7 @@ export default function Vacancy() {
     try {
       let response;
       if (isNew) {
-        response = await fetch(`https://${API_URL}/record/vacancies`, {
+        response = await fetch(`${API_URL}/record/vacancies`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -70,16 +69,13 @@ export default function Vacancy() {
           body: JSON.stringify(values),
         });
       } else {
-        response = await fetch(
-          `https://${API_URL}/record/vacancies/${params.id}`,
-          {
-            method: 'PATCH',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(values),
-          }
-        );
+        response = await fetch(`${API_URL}/record/vacancies/${params.id}`, {
+          method: 'PATCH',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(values),
+        });
       }
 
       if (!response.ok) {
@@ -96,8 +92,19 @@ export default function Vacancy() {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className='space-y-8 mx-auto max-w-sm'
+        className='space-y-8 mx-auto max-w-sm mt-48'
       >
+        <Breadcrumbs
+          breadcrumbs={[
+            { label: 'Vacancies', href: '/' },
+            {
+              label: 'Edit Vacancy',
+              href: `/${params.id}`,
+              active: true,
+            },
+          ]}
+        />
+
         <FormField
           control={form.control}
           name='employer'

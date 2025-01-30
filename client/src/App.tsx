@@ -2,6 +2,7 @@ import { Outlet } from 'react-router-dom';
 import { SidebarProvider, SidebarTrigger } from './components/ui/sidebar';
 import { AppSidebar } from './components/app-sidebar';
 import { ThemeProvider } from './components/theme-provider';
+import Template from './components/template';
 
 const App = () => {
   return (
@@ -12,7 +13,9 @@ const App = () => {
         <main className='w-full p-6'>
           <SidebarTrigger />
 
-          <Outlet />
+          <Template>
+            <Outlet />
+          </Template>
         </main>
       </SidebarProvider>
     </ThemeProvider>
